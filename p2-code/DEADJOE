@@ -1,0 +1,45 @@
+
+*** These modified files were found in JOE when it aborted on Thu May  6 22:30:32 2021
+*** JOE was aborted by UNIX signal 1
+
+*** File '/home/pehli025/csci_4061/p2-code/Makefile'
+CFLAGS = -Wall -g
+CC     = gcc $(CFLAGS)
+
+PROGRAMS = bl_server bl_client
+OBJECTS = util.o server_funcs.o simpio.o
+
+all : $(PROGRAMS)
+
+%.o : %.c blather.h
+	@echo Doing stuf...
+	$(CC) -c $<
+bl_server : $(OBJECTS) bl_server.o
+	@echo Doing stuf...
+	$(CC) -o $@ $^ -lpthread
+bl_client : $(OBJECTS) bl_client	@echo Doing stuf...
+	$(CC) -o $@ $^ -lpthread
+clean :
+	rm -f *.o *.fifo $(PROGRAMS)
+include test_Makefile
+*** File '(Unnamed)'
+Q
+
+*** File '(Unnamed)'
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/MERGE_MSG
+/home/pehli025/3081_s21/repo-pehli025/.git/COMMIT_EDITMSG
+/home/pehli025/csci_4061/p2-code/Makefile
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc
