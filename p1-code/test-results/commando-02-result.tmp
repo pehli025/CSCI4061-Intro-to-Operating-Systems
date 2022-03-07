@@ -1,0 +1,82 @@
+(TEST 2) Echoing via --echo and COMMANDO_ECHO
+COMMENTS:
+Checks 3 behaviors
+1. Normally commando does not echo entered commands
+2. When invoked with the '--echo' options, commands are echoed
+3. When the COMMANDO_ECHO environment variable is set, commands are
+   echoed
+Does so in a BASH terminal by feeding commands to commando from a file
+on standard input.
+
+
+
+program: bash -v
+Failure messages:
+- FAILURE: Output Mismatch at lines marked
+
+--- Side by Side Differences ---
+- Expect output in: test-results/raw/commando-02-expect.tmp
+- Actual output in: test-results/raw/commando-02-actual.tmp
+- Differing lines have a character like '|' '>' or '<' in the middle
+==== EXPECT ====                                                                       ==== ACTUAL ====                                                                    
+BASH> unset COMMANDO_ECHO                                                              BASH> unset COMMANDO_ECHO
+BASH> printf "help\nlist\nexit\n" > test-results/cmds.tmp                              BASH> printf "help\nlist\nexit\n" > test-results/cmds.tmp
+BASH> ./commando < test-results/cmds.tmp && printf "\n\n"                              BASH> ./commando < test-results/cmds.tmp && printf "\n\n"
+@> COMMANDO COMMANDS                                                                 | @> help
+                                                                                     > COMMANDO COMMANDS
+help               : show this message                                                 help               : show this message
+exit               : exit the program                                                  exit               : exit the program
+list               : list all jobs that have been started giving information on each   list               : list all jobs that have been started giving information on each
+pause nanos secs   : pause for the given number of nanseconds and seconds              pause nanos secs   : pause for the given number of nanseconds and seconds
+output-for int     : print the output for given job number                             output-for int     : print the output for given job number
+output-all         : print output for all jobs                                         output-all         : print output for all jobs
+wait-for int       : wait until the given job number finishes                          wait-for int       : wait until the given job number finishes
+wait-all           : wait for all jobs to finish                                       wait-all           : wait for all jobs to finish
+command arg1 ...   : non-built-in is run as a job                                      command arg1 ...   : non-built-in is run as a job
+@> JOB  #PID      STAT   STR_STAT OUTB COMMAND                                       | @> list
+@>                                                                                   | JOB  #PID      STAT   STR_STAT OUTB COMMAND
+                                                                                     | @> exit
+BASH> ./commando --echo < test-results/cmds.tmp && printf "\n\n"                       BASH> ./commando --echo < test-results/cmds.tmp && printf "\n\n"
+@> help                                                                                @> help
+COMMANDO COMMANDS                                                                      COMMANDO COMMANDS
+help               : show this message                                                 help               : show this message
+exit               : exit the program                                                  exit               : exit the program
+list               : list all jobs that have been started giving information on each   list               : list all jobs that have been started giving information on each
+pause nanos secs   : pause for the given number of nanseconds and seconds              pause nanos secs   : pause for the given number of nanseconds and seconds
+output-for int     : print the output for given job number                             output-for int     : print the output for given job number
+output-all         : print output for all jobs                                         output-all         : print output for all jobs
+wait-for int       : wait until the given job number finishes                          wait-for int       : wait until the given job number finishes
+wait-all           : wait for all jobs to finish                                       wait-all           : wait for all jobs to finish
+command arg1 ...   : non-built-in is run as a job                                      command arg1 ...   : non-built-in is run as a job
+@> list                                                                                @> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND                                            JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> exit                                                                                @> exit
+                                                                                       BASH> export COMMANDO_ECHO=1
+                                                                                       BASH> ./commando < test-results/cmds.tmp && printf "\n\n"
+BASH> export COMMANDO_ECHO=1                                                           @> help
+BASH> ./commando < test-results/cmds.tmp && printf "\n\n"                              COMMANDO COMMANDS
+@> help                                                                                help               : show this message
+COMMANDO COMMANDS                                                                      exit               : exit the program
+help               : show this message                                                 list               : list all jobs that have been started giving information on each
+exit               : exit the program                                                  pause nanos secs   : pause for the given number of nanseconds and seconds
+list               : list all jobs that have been started giving information on each   output-for int     : print the output for given job number
+pause nanos secs   : pause for the given number of nanseconds and seconds              output-all         : print output for all jobs
+output-for int     : print the output for given job number                             wait-for int       : wait until the given job number finishes
+output-all         : print output for all jobs                                         wait-all           : wait for all jobs to finish
+wait-for int       : wait until the given job number finishes                          command arg1 ...   : non-built-in is run as a job
+wait-all           : wait for all jobs to finish                                       @> list
+command arg1 ...   : non-built-in is run as a job                                      JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> list                                                                                @> exit
+JOB  #PID      STAT   STR_STAT OUTB COMMAND                                          (
+@> exit                                                                              (
+--- Line Differences ---
+EXPECT:   4) @> COMMANDO COMMANDS
+ACTUAL:   4) @> help
+ACTUAL:   5) COMMANDO COMMANDS
+EXPECT:  14) @> JOB  #PID      STAT   STR_STAT OUTB COMMAND
+EXPECT:  15) @> 
+EXPECT:  16) 
+ACTUAL:  15) @> list
+ACTUAL:  16) JOB  #PID      STAT   STR_STAT OUTB COMMAND
+ACTUAL:  17) @> exit
+
