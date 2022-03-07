@@ -1,0 +1,21 @@
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> 
+@> 
+@> help
+COMMANDO COMMANDS
+help               : show this message
+exit               : exit the program
+list               : list all jobs that have been started giving information on each
+pause nanos secs   : pause for the given number of nanseconds and seconds
+output-for int     : print the output for given job number
+output-all         : print output for all jobs
+wait-for int       : wait until the given job number finishes
+wait-all           : wait for all jobs to finish
+command arg1 ...   : non-built-in is run as a job
+@> 
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> 
+@> exit
+ALERTS:

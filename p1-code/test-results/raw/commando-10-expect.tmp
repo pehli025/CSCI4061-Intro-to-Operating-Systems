@@ -1,0 +1,34 @@
+@> rm -f ./test_data/print_args
+@> wait-for 0
+@> gcc -o test_data/print_args test_data/print_args.c
+@> wait-for 1
+@> test_data/print_args hello goodbye so long
+@> wait-for 2
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0           0    EXIT(0)    0 rm -f ./test_data/print_args 
+1    %1           0    EXIT(0)    0 gcc -o test_data/print_args test_data/print_args.c 
+2    %2           0    EXIT(0)   74 test_data/print_args hello goodbye so long 
+@> output-for 0
+@<<< Output for rm[%0] (0 bytes):
+----------------------------------------
+----------------------------------------
+@> output-for 1
+@<<< Output for gcc[%1] (0 bytes):
+----------------------------------------
+----------------------------------------
+@> output-for 2
+@<<< Output for test_data/print_args[%2] (74 bytes):
+----------------------------------------
+5 args received
+0: test_data/print_args
+1: hello
+2: goodbye
+3: so
+4: long
+----------------------------------------
+@> exit
+ALERTS:
+@!!! rm[%0]: EXIT(0)
+@!!! gcc[%1]: EXIT(0)
+@!!! test_data/print_args[%2]: EXIT(0)

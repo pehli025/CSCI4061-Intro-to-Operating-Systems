@@ -1,0 +1,19 @@
+@> ls -a -F test_data/stuff/
+@> wait-for 0
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0          0    EXIT(0)   55 ls -a -F test_data/stuff/ 
+@> output-for 0
+@<<< Output for ls[%0] (55 bytes):
+----------------------------------------
+./
+../
+empty
+gettysburg.txt
+quote.txt
+table.sh*
+util.o
+----------------------------------------
+@> exit
+ALERTS:
+@!!! ls[%0]: EXIT(0)

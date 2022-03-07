@@ -1,0 +1,16 @@
+@> cat test_data/quote.txt 
+@> wait-for 0
+@> output-for 0
+@<<< Output for cat[%0] (125 bytes): 
+----------------------------------------
+Object-oriented programming is an exceptionally bad idea which could
+only have originated in California.
+
+-- Edsger Dijkstra
+----------------------------------------
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0           0    EXIT(0)  125 cat test_data/quote.txt 
+@> exit
+ALERTS:
+@!!! cat[%0]: EXIT(0)

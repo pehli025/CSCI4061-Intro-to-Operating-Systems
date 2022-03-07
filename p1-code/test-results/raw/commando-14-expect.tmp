@@ -1,0 +1,8 @@
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> pause 10000 0
+@> pause 0 1
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+@> exit
+ALERTS:

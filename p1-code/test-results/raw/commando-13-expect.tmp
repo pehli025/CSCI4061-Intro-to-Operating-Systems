@@ -1,0 +1,26 @@
+@> gcc -o test_data/sleep_print test_data/sleep_print.c
+@> wait-for 0
+@> test_data/sleep_print 1 hi there
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0           0    EXIT(0)    0 gcc -o test_data/sleep_print test_data/sleep_print.c 
+1    %1          -1        RUN   -1 test_data/sleep_print 1 hi there 
+@> output-for 1
+@<<< Output for test_data/sleep_print[%1] (-1 bytes):
+----------------------------------------
+test_data/sleep_print[%1] : output not ready
+----------------------------------------
+@> wait-for 1
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0           0    EXIT(0)    0 gcc -o test_data/sleep_print test_data/sleep_print.c 
+1    %1           1    EXIT(1)   10 test_data/sleep_print 1 hi there 
+@> output-for 1
+@<<< Output for test_data/sleep_print[%1] (10 bytes):
+----------------------------------------
+hi there 
+----------------------------------------
+@> exit
+ALERTS:
+@!!! gcc[%0]: EXIT(0)
+@!!! test_data/sleep_print[%1]: EXIT(1)

@@ -1,0 +1,12 @@
+@> sleep 1 
+@> wait-for 0
+@> output-for 0
+@<<< Output for sleep[%0] (0 bytes): 
+----------------------------------------
+----------------------------------------
+@> list
+JOB  #PID      STAT   STR_STAT OUTB COMMAND
+0    %0           0    EXIT(0)    0 sleep 1 
+@> exit
+ALERTS:
+@!!! sleep[%0]: EXIT(0)
